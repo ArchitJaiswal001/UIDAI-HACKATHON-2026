@@ -49,6 +49,7 @@ UIDAI-Hackathon-Submission/
 ├── requirements.txt          # Python dependencies
 └── README.md                 # Project Documentation
 
+```
 ---
 
 ## ⚡ Quick Start
