@@ -65,7 +65,7 @@ UIDAI-Hackathon-Submission/
 ### Clone the Repository
 ```bash
 git clone https://github.com/ArchitJaiswal001/UIDAI-HACKATHON-2026.git
-cd UIDAI_HACKATHON_2026
+cd UIDAI-HACKATHON-2026
 ```
 
 
