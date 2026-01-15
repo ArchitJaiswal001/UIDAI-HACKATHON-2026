@@ -92,21 +92,56 @@ plt.ylabel('District')
 plt.tight_layout()
 plt.show()
 
-# --- Insight B: Compliance Gaps ---
-# Logic: High Child Population vs. Low Biometric Updates indicates a compliance failure.
-# Metric: Child Bio Updates / Total Child Population
+# --- Insight B: Compliance Gaps (Grouped Bar Chart) ---
+# Goal: visualize the gap between 'Total Child Pool' (Blue) and 'Biometric Updates' (Red)
+
+# 1. Prepare the Data
+# We select the top 10 worst performing districts (lowest compliance)
 master['child_pool'] = master['age_0_5'] + master['age_5_17']
-kids_data = master[master['child_pool'] > 100].copy() # Ignore small districts
+kids_data = master[master['child_pool'] > 100].copy() # Filter out tiny districts
 kids_data['compliance_ratio'] = kids_data['bio_age_5_17'] / kids_data['child_pool']
 
-# Sort by LOWEST ratio (worst compliance)
+# Get top 10 lagging districts
 lagging_districts = kids_data.sort_values('compliance_ratio', ascending=True).head(10)
 
-plt.figure(figsize=(12, 6))
-sns.barplot(data=lagging_districts, x='compliance_ratio', y='district', hue='state', dodge=False, palette='Reds_r')
-plt.title('Top 10 Districts with Critical Child Update Gaps')
-plt.xlabel('Compliance Ratio (Updates per Child)')
-plt.ylabel('District')
+# 2. "Melt" the Data for Side-by-Side Plotting
+# This transforms columns into rows so Seaborn can group them
+viz_data = pd.melt(
+    lagging_districts, 
+    id_vars=['district', 'state'], 
+    value_vars=['child_pool', 'bio_age_5_17'],
+    var_name='Metric', 
+    value_name='Count'
+)
+
+# Rename the metrics for the Legend
+viz_data['Metric'] = viz_data['Metric'].replace({
+    'child_pool': 'Total Child Population', 
+    'bio_age_5_17': 'Biometric Updates Done'
+})
+
+# 3. Create the Grouped Bar Chart
+plt.figure(figsize=(12, 7))
+
+# We use 'hue' to create the side-by-side bars
+ax = sns.barplot(
+    data=viz_data, 
+    x='district', 
+    y='Count', 
+    hue='Metric', 
+    palette={'Total Child Population': '#1f77b4', 'Biometric Updates Done': '#d62728'} # Blue & Red
+)
+
+# 4. Polish the Chart
+plt.title('CRITICAL GAP: Child Population vs. Actual Biometric Updates', fontsize=14, fontweight='bold')
+plt.ylabel('Number of Children', fontsize=12)
+plt.xlabel('District', fontsize=12)
+plt.legend(title='Metric')
+
+# Add values on top of the bars (so judges can see the "0")
+for container in ax.containers:
+    ax.bar_label(container, fmt='%d', padding=3)
+
 plt.tight_layout()
 plt.show()
 
