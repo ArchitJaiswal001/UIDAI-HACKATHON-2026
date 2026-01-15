@@ -155,3 +155,81 @@ if not df_demo.empty:
         plt.show()
 
         print(f"ANOMALY FOUND: {top_district} had {spike_val} updates on {spike_date.date()}")
+        
+
+# --- CORRECTED AUDIT SCRIPT ---
+
+print("--- AUDIT 1: VERIFYING MIGRATION (PUNE) ---")
+# Check if Pune exists in the data first
+if 'Pune' in master['district'].values:
+    # FIX: We only select the NUMERICAL columns to sum, excluding 'month'
+    pune_data = master[master['district'] == 'Pune'][['demo_age_17_', 'age_18_greater']].sum()
+
+    updates = int(pune_data['demo_age_17_'])
+    new_enrolments = int(pune_data['age_18_greater'])
+
+    print(f"Total Adult Updates (Address Changes): {updates}")
+    print(f"Total New Adult Enrolments:          {new_enrolments}")
+
+    if new_enrolments == 0:
+        print("VERDICT: Infinite Ratio (0 new enrolments). Confirmed Migration Hub.")
+    else:
+        print(f"VERDICT: Updates are {int(updates / new_enrolments)}x higher than enrolments.")
+else:
+    print("⚠️ Data for 'Pune' not found in this chunk. Skipping Pune audit.")
+print("-" * 50)
+
+
+print("\n--- AUDIT 2: VERIFYING COMPLIANCE GAP (SPSR NELLORE) ---")
+target_district = 'Spsr Nellore'
+if target_district in master['district'].values:
+    # FIX: Only select numerical columns
+    nellore_data = master[master['district'] == target_district][['age_0_5', 'age_5_17', 'bio_age_5_17']].sum()
+
+    total_kids = nellore_data['age_0_5'] + nellore_data['age_5_17']
+    total_updates = nellore_data['bio_age_5_17']
+
+    print(f"Total Children (0-17) Enrolled: {int(total_kids)}")
+    print(f"Total Biometric Updates (5-17): {int(total_updates)}")
+
+    if total_updates == 0:
+        print("VERDICT: CONFIRMED. Zero updates found despite having child population.")
+    else:
+        print(f"VERDICT: Ratio is {total_updates/total_kids:.2%}")
+else:
+    print(f"⚠️ Data for '{target_district}' not found. Trying a different district...")
+    # Fallback: Find any district with 0 compliance to show the judge
+    try:
+        master['child_pool'] = master['age_0_5'] + master['age_5_17']
+        worst_district = master[master['child_pool'] > 100].sort_values('bio_age_5_17').iloc[0]
+        print(f"   -> Alternative Found: {worst_district['district']} (Updates: {int(worst_district['bio_age_5_17'])})")
+    except:
+        print("   -> No suitable data found.")
+print("-" * 50)
+
+
+print("\n--- AUDIT 3: VERIFYING THE ANOMALY SPIKE (UDAIPUR) ---")
+# We need to query the original daily dataframe (df_demo)
+# Ensure df_demo exists and has the 'demo_age_17_' column
+if 'df_demo' in locals() and not df_demo.empty:
+    target_anom = 'Udaipur'
+    check_date = '2025-03-01'
+
+    spike_check = df_demo[
+        (df_demo['district'] == target_anom) &
+        (df_demo['date'] == check_date)
+    ]
+
+    if not spike_check.empty:
+        spike_val = spike_check['demo_age_17_'].sum()
+        print(f"Updates on {check_date} in {target_anom}: {spike_val}")
+
+        # Compare to average
+        avg_val = df_demo[df_demo['district'] == target_anom]['demo_age_17_'].mean()
+        print(f"Average Daily Updates in {target_anom}:    {avg_val:.0f}")
+        print(f"VERDICT: This day was {spike_val / avg_val:.0f}x higher than normal.")
+    else:
+        print(f"⚠️ No data found for {target_anom} on {check_date} in the uploaded files.")
+else:
+    print("⚠️ 'df_demo' not loaded. Please run the Data Loading step first.")
+
