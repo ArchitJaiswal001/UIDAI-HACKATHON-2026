@@ -96,9 +96,7 @@ All generated visualizations are automatically saved in the output/ directory.
 ## 📈 Outputs
 
 - **Migration Magnets**: Identifies districts attracting high labor migration.
-  
 - **Compliance Gap Analysis**: Highlights regions requiring administrative intervention.
-  
 - **Anomaly Spike Detection**: Detects statistically significant single-day transaction spikes indicative of potential fraud or system anomalies.
 
 ---
