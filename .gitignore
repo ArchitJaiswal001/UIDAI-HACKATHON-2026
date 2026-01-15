@@ -1,0 +1,28 @@
+# --- DATASETS (Crucial: Do not upload these) ---
+*.csv
+*.zip
+*.json
+data/
+datasets/
+input/
+
+# --- PYTHON SYSTEM FILES ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- VIRTUAL ENVIRONMENTS ---
+venv/
+env/
+.env
+.venv/
+
+# --- IDE SETTINGS (VS Code / PyCharm) ---
+.vscode/
+.idea/
+*.swp
+
+# --- OPERATING SYSTEM FILES ---
+.DS_Store
+Thumbs.db
