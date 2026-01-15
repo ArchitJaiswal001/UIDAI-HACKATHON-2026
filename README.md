@@ -49,33 +49,41 @@ UIDAI-Hackathon-Submission/
 ├── requirements.txt          # Python dependencies
 └── README.md                 # Project Documentation
 
-⚡ Quick Start
+## ⚡ Quick Start
 Prerequisites
-Python 3.8+
 
-Pip (Python Package Manager)
+-Python 3.8 or higher
+-pip (Python Package Manager)
 
-Installation
-Clone the Repo
+## 🔧 Installation
+-Clone the Repository
+-git clone https://github.com/ArchitJaiswal001/UIDAI_HACKATHON_2026.git
+-cd UIDAI_HACKATHON_2026
 
-Bash
+## Install Dependencies
+ pip install -r requirements.txt
 
-git clone https://github.com/ArchitJaiswal001/UIDAI-HACKATHON-2026.git
-Install Dependencies
+### 📊 Dataset Setup
 
-Bash
+-Download the official OGD datasets as specified in the problem statement.
+-Place all downloaded .zip files in the root directory of the project.
+-Datasets are intentionally excluded from version control as per hackathon guidelines.
 
-pip install -r requirements.txt
-Add Data
+###▶️ Running the Project
+python src/analysis_and_viz.py
 
-Download the official OGD datasets.
+All generated visualizations are automatically saved in the output/ directory.
 
-Place the .zip files in the root directory.
+### 📈 Outputs
 
-Run Analysis
+-Migration Magnets: Identifies districts attracting high labor migration.
+-Compliance Gap Analysis: Highlights regions requiring administrative intervention.
+-Anomaly Spike Detection: Detects statistically significant single-day transaction spikes indicative of potential fraud or system anomalies.
 
-Bash
+###📝 Notes
 
-python src/analysis.py
-📜 License
-This project is open-source and available under the MIT License.
+The project applies statistical monitoring techniques to analyze migration patterns and detect black swan anomaly events.
+Designed for clarity, reproducibility, and evaluation under UIDAI Hackathon 2026 guidelines.
+
+###📜 License
+This project is open-source and available under the **MIT** License.
