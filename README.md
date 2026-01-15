@@ -49,6 +49,8 @@ UIDAI-Hackathon-Submission/
 ├── requirements.txt          # Python dependencies
 └── README.md                 # Project Documentation
 
+---
+
 ## ⚡ Quick Start
 
 ### Prerequisites
@@ -63,23 +65,32 @@ UIDAI-Hackathon-Submission/
 ```bash
 git clone https://github.com/ArchitJaiswal001/UIDAI_HACKATHON_2026.git
 cd UIDAI_HACKATHON_2026
+```
 
 
 ### Install Dependencies
- pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
+---
 
-### 📊 Dataset Setup
+## 📊 Dataset Setup
 
--Download the official OGD datasets as specified in the problem statement.
--Place all downloaded .zip files in the root directory of the project.
--Datasets are intentionally excluded from version control as per hackathon guidelines.
+- Download the official OGD datasets as specified in the problem statement.
+- Place all downloaded .zip files in the root directory of the project.
+- Datasets are intentionally excluded from version control as per hackathon guidelines.
 
-### ▶️ Running the Project
-python src/analysis_and_viz.py
+---
 
+## ▶️ Running the Project
+```bash
+python src/analysis.py
+```
 
 All generated visualizations are automatically saved in the output/ directory.
+
+---
 
 ## 📈 Outputs
 
@@ -87,10 +98,14 @@ All generated visualizations are automatically saved in the output/ directory.
 -Compliance Gap Analysis: Highlights regions requiring administrative intervention.
 -Anomaly Spike Detection: Detects statistically significant single-day transaction spikes indicative of potential fraud or system anomalies.
 
-📝 Notes
+---
+
+## 📝 Notes
 
 The project applies statistical monitoring techniques to analyze migration patterns and detect black swan anomaly events.
 Designed for clarity, reproducibility, and evaluation under UIDAI Hackathon 2026 guidelines.
 
-📜 License
+---
+
+## 📜 License
 This project is open-source and available under the MIT License.
