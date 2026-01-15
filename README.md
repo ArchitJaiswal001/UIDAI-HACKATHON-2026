@@ -64,7 +64,7 @@ UIDAI-Hackathon-Submission/
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/ArchitJaiswal001/UIDAI_HACKATHON_2026.git
+git clone https://github.com/ArchitJaiswal001/UIDAI-HACKATHON-2026.git
 cd UIDAI_HACKATHON_2026
 ```
 
@@ -95,9 +95,9 @@ All generated visualizations are automatically saved in the output/ directory.
 
 ## 📈 Outputs
 
--Migration Magnets: Identifies districts attracting high labor migration.
--Compliance Gap Analysis: Highlights regions requiring administrative intervention.
--Anomaly Spike Detection: Detects statistically significant single-day transaction spikes indicative of potential fraud or system anomalies.
+-**Migration Magnets**: Identifies districts attracting high labor migration.
+-**Compliance Gap Analysis**: Highlights regions requiring administrative intervention.
+-**Anomaly Spike Detection**: Detects statistically significant single-day transaction spikes indicative of potential fraud or system anomalies.
 
 ---
 
@@ -109,4 +109,4 @@ Designed for clarity, reproducibility, and evaluation under UIDAI Hackathon 2026
 ---
 
 ## 📜 License
-This project is open-source and available under the MIT License.
+This project is open-source and available under the **MIT** License.
