@@ -60,7 +60,7 @@ Clone the Repo
 
 Bash
 
-git clone https://github.com/ArchitJaiswal001/UIDAI_HACKATHON_2026.git
+git clone https://github.com/ArchitJaiswal001/UIDAI-HACKATHON-2026.git
 Install Dependencies
 
 Bash
